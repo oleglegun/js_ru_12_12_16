@@ -21,7 +21,6 @@ export default class Article extends Component {
             <div>
                 <h3 onClick = {this.toggleOpen}>{article.title}</h3>
                 {this.getBody()}
-                {this.getComments()}
             </div>
         )
     }
@@ -37,6 +36,7 @@ export default class Article extends Component {
         return (
             <section>
                 {this.props.article.text}
+                {this.getComments()}
             </section>
         )
     }
