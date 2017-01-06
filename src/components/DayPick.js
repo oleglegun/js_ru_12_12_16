@@ -12,7 +12,9 @@ class DayPick extends Component {
         const {from, to} = this.state;
         return (
             <div>
-                <DayPicker onDayClick={this.handleDayPick} selectedDays={ day => DateUtils.isDayInRange(day, { from, to }) }/>
+                <DayPicker
+                    onDayClick={this.handleDayPick}
+                    selectedDays={ day => DateUtils.isDayInRange(day, { from, to }) }/>
                 <p>You have selected: {from ? from.toLocaleDateString() : ''} - {to ? to.toLocaleDateString() : ''}</p>
             </div>
         );

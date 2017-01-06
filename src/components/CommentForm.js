@@ -2,36 +2,35 @@ import React, {Component, PropTypes} from 'react';
 
 class CommentForm extends Component {
     state = {
-        name: null,
-        text: null
+        user: '',
+        text: ''
     };
 
     render() {
         return (
-            <div>
-                Name: <input type="text" onChange={this.handleChangeName} name="comment-name" />
+            <form onSubmit={this.handleSubmit}>
+                Name: <input type="text" onChange={this.handleChange('user')} value={this.state.user}/>
                 <br/>
-                Comment: <input type="text" onChange={this.handleChangeText} name="comment-text"/>
+                Comment: <input type="text" onChange={this.handleChange('text')}  value={this.state.text}/>
                 <br/>
-                <button onClick={this.publishComment}>Publish</button>
-            </div>
+                <button type="submit">Publish</button>
+            </form>
         );
     }
 
-    handleChangeName = (e) => {
+    handleChange = field => ev => {
         this.setState({
-            name: e.target.value
+            [field]: ev.target.value
         });
     };
 
-    handleChangeText = (e) => {
+    handleSubmit = (ev) => {
+        ev.preventDefault();
+        console.log('---', 'Name: ', this.state.user, ' Comment: ', this.state.text);
         this.setState({
-            text: e.target.value
-        });
-    };
-
-    publishComment = (e) => {
-        console.log('---', 'Name: ', this.state.name, ' Comment: ', this.state.text);
+            user: '',
+            text: ''
+        })
     }
 }
 
