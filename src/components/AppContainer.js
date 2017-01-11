@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import ArticleList from './ArticleList'
 import UserForm from './UserForm'
 import Filter from './Filters'
@@ -9,7 +10,7 @@ function AppContainer(props) {
         <div>
             <Counter/>
             <UserForm />
-            <Filter articles = {[]}/>
+            <Filter articles = {props.articles}/>
             <ArticleList/>
         </div>
     )
@@ -18,4 +19,10 @@ function AppContainer(props) {
 AppContainer.propTypes = {
 }
 
-export default AppContainer
+const mapStateToProps = (state) => {
+    return {
+        articles: state.articles
+    }
+}
+
+export default connect(mapStateToProps)(AppContainer)

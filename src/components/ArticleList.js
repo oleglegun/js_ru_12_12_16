@@ -38,10 +38,25 @@ ArticleList.propTypes = {
     toggleOpenItem: PropTypes.func.isRequired
 }
 
-export default connect(
-    (state) => {
-        return {
-            articles: state.articles
-        }
+const mapStateToProps = (state) => {
+    const { filters, articles } = state
+
+    const { selectedIds } = filters
+    console.log('---', selectedIds);
+    const { from, to } = filters.dateRange
+
+    const filteredArticles = articles.filter(article => {
+        const publishDate = Date.parse(article.date)
+        return (
+            (!selectedIds.length || (selectedIds.indexOf(article.id) !== -1))
+            &&
+            (!from || !to || (publishDate >= from && publishDate <= to))
+        )
+    })
+
+    return {
+        articles: filteredArticles
     }
-)(accordion(ArticleList))
+}
+
+export default connect(mapStateToProps)(accordion(ArticleList))
