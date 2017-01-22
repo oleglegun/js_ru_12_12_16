@@ -3,24 +3,20 @@ import { normalizedComments } from '../fixtures'
 import { arrayToMap } from '../helpers'
 import { Record } from 'immutable'
 
-const commentModel = Record({
+const CommentModel = Record({
     id: null,
     user: null,
     text: null
 })
 
-const defaultState = arrayToMap(normalizedComments, commentModel)
+const defaultState = arrayToMap(normalizedComments, CommentModel)
 
 export default (state = defaultState, action) => {
-    const { type, payload, response, error } = action
-
+    const { type, payload } = action
     switch (type) {
         case ADD_COMMENT:
-            return state.set(payload.id, new commentModel({
-                id: payload.id,
-                user: payload.user,
-                text: payload.text
-            }))
+            const { randomId } = action
+            return state.set(randomId, new CommentModel({id: randomId, ...payload.comment}))
     }
 
     return state

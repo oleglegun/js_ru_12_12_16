@@ -44,8 +44,9 @@ class CommentList extends Component {
     }
 
     handleAddComment = (state) => {
-        console.log('---', 'Adding Comment', state.user, state.text)
-        this.props.addComment(null, state.user, state.text, this.props.articleId)
+        const comment = {...state}
+        const { articleId } = this.props
+        this.props.addComment(comment, articleId)
     }
 }
 

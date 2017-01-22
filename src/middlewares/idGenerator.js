@@ -1,12 +1,8 @@
-import { ADD_COMMENT } from '../constants'
+import { generateRandomId } from '../helpers'
 
 export default store => next => action => {
-    // const id = Date.now().toString.slice(5)
+    const { generateId, ...rest } = action
+    if (!generateId) return next(action)
 
-    if (action.type === ADD_COMMENT) {
-        action.payload.id = Date.now() % 10000
-        console.log('---', 'idGenerator worked!')
-    }
-
-    next(action)
+    next({ ...rest, randomId: generateRandomId() })
 }

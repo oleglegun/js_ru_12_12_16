@@ -20,18 +20,8 @@ export default (articlesState = defaultState, action) => {
         case DELETE_ARTICLE:
             return articlesState.delete(payload.id)
         case ADD_COMMENT:
-            // console.log('---', articlesState.get(payload.articleId));
-            return articlesState.update(payload.articleId, article => {
-                return new ArticleModel({
-                    id: article.id,
-                    data: article.date,
-                    title: article.title,
-                    text: article.text,
-                    comments: article.comments.concat([payload.id])
-                })
-            })
-            // return articlesState.updateIn([payload.articleId, 'comments'], comment => )
+            const { articleId } = payload
+            return articlesState.updateIn([articleId, 'comments'], comments => comments.concat([action.randomId]))
     }
-
     return articlesState
 }
