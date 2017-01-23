@@ -12,5 +12,5 @@ export default store => next => action => {
         $.get(callAPI)
             .done(response => next({...rest, type: type + SUCCESS, response}))
             .fail(error => next({...rest, type: type + FAIL, error}))
-    }, 1000)
+    }, 10)
 }
