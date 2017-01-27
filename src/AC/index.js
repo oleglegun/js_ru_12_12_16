@@ -1,4 +1,4 @@
-import { INCREMENT, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS,
+import { INCREMENT, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, LOAD_ALL_COMMENTS, LOAD_COMMENTS_RANGE,
     START, SUCCESS, FAIL } from '../constants'
 import $ from 'jquery'
 
@@ -58,5 +58,20 @@ export function loadArticleComments(articleId) {
         type: LOAD_ARTICLE_COMMENTS,
         payload: { articleId },
         callAPI: `/api/comment?article=${articleId}`
+    }
+}
+
+export function loadAllComments() {
+    return {
+        type: LOAD_ALL_COMMENTS,
+        callAPI: '/api/comment'
+    }
+}
+
+export function loadCommentsRange(limit, offset) {
+    return {
+        type: LOAD_COMMENTS_RANGE,
+        payload: { limit, offset },
+        callAPI: `/api/comment?limit=${limit}&offset=${offset}`
     }
 }
